@@ -5,7 +5,7 @@ class Rook:
     def get_possible_moves(self, current_row, current_col, board):
         possible_moves = []
 
-        # Движение вверх
+        # Upward movement
         for row in range(current_row - 1, -1, -1):
             if board[row][current_col] == ' ':
                 possible_moves.append((row, current_col))
@@ -14,7 +14,7 @@ class Rook:
                     possible_moves.append((row, current_col))
                 break
 
-        # Движение вниз
+        # Downward movement
         for row in range(current_row + 1, 8):
             if board[row][current_col] == ' ':
                 possible_moves.append((row, current_col))
@@ -23,7 +23,7 @@ class Rook:
                     possible_moves.append((row, current_col))
                 break
 
-        # Движение влево
+        #Moving to the left
         for col in range(current_col - 1, -1, -1):
             if board[current_row][col] == ' ':
                 possible_moves.append((current_row, col))
@@ -32,7 +32,7 @@ class Rook:
                     possible_moves.append((current_row, col))
                 break
 
-        # Движение вправо
+        #Moving to the right
         for col in range(current_col + 1, 8):
             if board[current_row][col] == ' ':
                 possible_moves.append((current_row, col))
@@ -52,31 +52,31 @@ class Pawn:
     def get_possible_moves(self, current_row, current_col, board):
         possible_moves = []
         if self.color == 'white':
-            # Пешка белого цвета может двигаться вперед на одну клетку
+            # A white pawn can move forward one square
             if current_row - 1 >= 0 and board[current_row - 1][current_col] == ' ':
                 possible_moves.append((current_row - 1, current_col))
 
-            # Пешка белого цвета может двигаться вперед на две клетки, если она находится на начальной позиции
+            # A white pawn can move forward two squares if it is in the starting position
             if current_row == 6 and board[current_row - 1][current_col] == ' ' and board[current_row - 2][
                 current_col] == ' ':
                 possible_moves.append((current_row - 2, current_col))
 
-            # Пешка белого цвета может двигаться по диагонали, чтобы съесть фигуру другого цвета
+            # A white pawn can move diagonally to eat a piece of a different color
             if current_row - 1 >= 0 and current_col - 1 >= 0 and board[current_row - 1][current_col - 1] != ' ':
                 possible_moves.append((current_row - 1, current_col - 1))
             if current_row - 1 >= 0 and current_col + 1 <= 7 and board[current_row - 1][current_col + 1] != ' ':
                 possible_moves.append((current_row - 1, current_col + 1))
         else:
-            # Пешка черного цвета может двигаться вперед на одну клетку
+            # A black pawn can move forward one square
             if current_row + 1 <= 7 and board[current_row + 1][current_col] == ' ':
                 possible_moves.append((current_row + 1, current_col))
 
-            # Пешка черного цвета может двигаться вперед на две клетки, если она находится на начальной позиции
+            # A black pawn can move forward two squares if it is in the starting position
             if current_row == 1 and board[current_row + 1][current_col] == ' ' and board[current_row + 2][
                 current_col] == ' ':
                 possible_moves.append((current_row + 2, current_col))
 
-            # Пешка черного цвета может двигаться по диагонали, чтобы съесть фигуру другого цвета
+            # A black pawn can move diagonally to eat a piece of a different color
             if current_row + 1 <= 7 and current_col - 1 >= 0 and board[current_row + 1][current_col - 1] != ' ':
                 possible_moves.append((current_row + 1, current_col - 1))
             if current_row + 1 <= 7 and current_col + 1 <= 7 and board[current_row + 1][current_col + 1] != ' ':
@@ -92,7 +92,7 @@ class King:
     def get_possible_moves(self, current_row, current_col, board):
         possible_moves = []
 
-        # Все возможные направления ходов короля
+        # All possible directions of the king's moves
         directions = [(1, 0), (-1, 0), (0, 1), (0, -1), (1, 1), (-1, -1), (1, -1), (-1, 1)]
 
         for direction in directions:
@@ -116,7 +116,7 @@ class Knight:
     def get_possible_moves(self, current_row, current_col, board):
         possible_moves = []
 
-        # Возможные относительные смещения для ходов коня
+        # Possible relative offsets for knight moves
         moves = [(1, 2), (2, 1), (-1, 2), (-2, 1), (1, -2), (2, -1), (-1, -2), (-2, -1)]
 
         for move in moves:
@@ -142,7 +142,7 @@ class Bishop:
     def get_possible_moves(self, current_row, current_col, board):
         possible_moves = []
 
-        # Движение по диагонали вверх-влево
+        # Moving diagonally up and to the left
         row, col = current_row - 1, current_col - 1
         while row >= 0 and col >= 0:
             if board[row][col] == ' ':
@@ -154,7 +154,7 @@ class Bishop:
             row -= 1
             col -= 1
 
-        # Движение по диагонали вверх-вправо
+        # Moving diagonally up and to the right
         row, col = current_row - 1, current_col + 1
         while row >= 0 and col < 8:
             if board[row][col] == ' ':
@@ -166,7 +166,7 @@ class Bishop:
             row -= 1
             col += 1
 
-        # Движение по диагонали вниз-влево
+        # Moving diagonally down to the left
         row, col = current_row + 1, current_col - 1
         while row < 8 and col >= 0:
             if board[row][col] == ' ':
@@ -178,7 +178,7 @@ class Bishop:
             row += 1
             col -= 1
 
-        # Движение по диагонали вниз-вправо
+        # Moving diagonally down-to the right
         row, col = current_row + 1, current_col + 1
         while row < 8 and col < 8:
             if board[row][col] == ' ':
@@ -201,7 +201,7 @@ class Queen:
     def get_possible_moves(self, current_row, current_col, board):
         possible_moves = []
 
-        # Движение вверх
+        # Upward movement
         for row in range(current_row - 1, -1, -1):
             if board[row][current_col] == ' ':
                 possible_moves.append((row, current_col))
@@ -210,7 +210,7 @@ class Queen:
                     possible_moves.append((row, current_col))
                 break
 
-        # Движение вниз
+        # Downward movement
         for row in range(current_row + 1, 8):
             if board[row][current_col] == ' ':
                 possible_moves.append((row, current_col))
@@ -219,7 +219,7 @@ class Queen:
                     possible_moves.append((row, current_col))
                 break
 
-        # Движение влево
+        # Moving to the left
         for col in range(current_col - 1, -1, -1):
             if board[current_row][col] == ' ':
                 possible_moves.append((current_row, col))
@@ -228,7 +228,7 @@ class Queen:
                     possible_moves.append((current_row, col))
                 break
 
-        # Движение вправо
+        # Moving to the right
         for col in range(current_col + 1, 8):
             if board[current_row][col] == ' ':
                 possible_moves.append((current_row, col))
@@ -237,7 +237,7 @@ class Queen:
                     possible_moves.append((current_row, col))
                 break
 
-        # Движение по диагонали вверх-влево
+        # Moving diagonally up and to the left
         row, col = current_row - 1, current_col - 1
         while row >= 0 and col >= 0:
             if board[row][col] == ' ':
@@ -249,7 +249,7 @@ class Queen:
             row -= 1
             col -= 1
 
-        # Движение по диагонали вверх-вправо
+        # Moving diagonally up and to the right
         row, col = current_row - 1, current_col + 1
         while row >= 0 and col < 8:
             if board[row][col] == ' ':
@@ -261,7 +261,7 @@ class Queen:
             row -= 1
             col += 1
 
-        # Движение по диагонали вниз-влево
+        # Moving diagonally down to the left
         row, col = current_row + 1, current_col - 1
         while row < 8 and col >= 0:
             if board[row][col] == ' ':
@@ -273,7 +273,7 @@ class Queen:
             row += 1
             col -= 1
 
-        # Движение по диагонали вниз-вправо
+        # Moving diagonally down-to the right
         row, col = current_row + 1, current_col + 1
         while row < 8 and col < 8:
             if board[row][col] == ' ':
@@ -295,7 +295,7 @@ class ChessGame:
         self.initialize_pieces()
 
     def initialize_pieces(self):
-        # Расстановка фигур на доске
+        # Placing the pieces on the board
         self.board[0][0] = Rook('black')
         self.board[0][1] = Knight('black')
         self.board[0][2] = Bishop('black')
